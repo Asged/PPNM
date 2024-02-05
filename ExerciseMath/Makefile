@@ -1,8 +1,11 @@
 Out.txt : main.exe
-	mono main.exe > Out.txt
+	mono main.exe > Out.txt 
 
-main.exe : main.cs
-	mcs main.cs
+main.exe : main.cs sfuns.dll
+	mcs -target:exe -out:main.exe main.cs
+
+sfuns.dll : sfuns.cs
+        mcs -target:library -out:sfuns.dll sfuns.cs
 
 clean :
 	rm -f Out.txt main.exe
