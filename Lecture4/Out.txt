@@ -1,0 +1,4 @@
+my max int = 2147483647
+my min int = -2147483648
+smallest epsilon using double 2.22044604925031E-16
+smallest epsilon using float 1.192093E-07
