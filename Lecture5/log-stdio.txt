@@ -1,0 +1,4 @@
+this goes to stderr: x=7
+this also goes to stderr: line=1.234e56
+this goes to stderr: x=7
+this also goes to stderr: line=1.234e56

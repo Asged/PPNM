@@ -1,0 +1,6 @@
+this goes to stdout: x=7
+this goes to stdout: x=1.234E+56
+
+
+this goes to stdout: x=7
+this goes to stdout: x=1.234E+56
