@@ -1,0 +1,12 @@
+Max int = 2147483647
+int.MaxValue = 2147483647
+Min int = -2147483648
+int.MinValue = -2147483648
+double machine epsilon = 2.22044604925031E-16
+float machine epsilon = 1.192093E-07
+a==b ? False
+a>1 ? False
+b>1 ? True
+1.11022302462516E-16
+1
+1
