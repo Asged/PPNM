@@ -1,9 +1,8 @@
 using System;
 using static System.Console;
 
-public class vec(){
+public class vec{
     public double x,y,z; //vector components
-    //...
 
     public vec(){
         x=y=z=0;
@@ -23,15 +22,15 @@ public class vec(){
     }
 
     public static vec operator+(vec v, vec u){
-        return new vec(v.x+u.x, v.y+u.y, v.z+u.z)
+        return new vec(v.x+u.x, v.y+u.y, v.z+u.z);
     }
 
     public static vec operator-(vec u){
-        return new vec(-u.x,-u.y,-u.z)
+        return new vec(-u.x,-u.y,-u.z);
     }
 
     public static vec operator-(vec v, vec u){
-        return new vec(v.x-u.x, v.y-u.y, v.z-u.z)
+        return new vec(v.x-u.x, v.y-u.y, v.z-u.z);
     }
 
     public void print(string s){
@@ -47,8 +46,23 @@ public class vec(){
     }
 
     public static double dot(vec v, vec u){
-        return v.x*u.x, v.y*u.y, v.z*u.z;
+        return v.x*u.x +  v.y*u.y +  v.z*u.z;
     }
 
+    static bool approx(double a,double b,double acc=1e-9,double eps=1e-9){
+    	if(System.Math.Abs(a-b)<acc)return true;
+	if(System.Math.Abs(a-b)<(System.Math.Abs(a)+System.Math.Abs(b))*eps)return true;
+	return false;
+    }    
+    public bool approx(vec other){
+	if(!approx(this.x,other.x)) return false;
+	if(!approx(this.y,other.y)) return false;
+	if(!approx(this.z,other.z)) return false;
+	return true;
+    }
+    public static bool approx(vec u, vec v) => u.approx(v);
     
+    public override string ToString(){
+    	return $"{x} {y} {z}";
+    }
 }
