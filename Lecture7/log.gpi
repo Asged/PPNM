@@ -1,5 +1,8 @@
 \
 	set terminal svg background "white" ;\
-	set out "Erf.gnuplot.svg" ;\
-	plot "Out.txt" with lines ;\
+	set out "Out.Erf.gnuplot.svg" ;\
+	plot \
+		"Out.txt" with lines \
+		,"erf.data.txt" using 1:2 with points pointtype 6 \
+		,"erf.data.txt" using (-($1)):(-($2)) with points pointtype 6 ;\
 
