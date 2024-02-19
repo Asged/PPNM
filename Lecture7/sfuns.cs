@@ -8,5 +8,13 @@ public static class sfuns{
 		double sum=t*(a[0]+t*(a[1]+t*(a[2]+t*(a[3]+t*a[4]))));/* the right thing */
 		
 		return 1-sum*System.Math.Exp(-x*x);
-} 
 }
+	public static double gamma(double x){
+		///single precision gamma function (Gergo Nemes, from Wikipedia)
+		if(x<0)return System.Math.PI/System.Math.Sin(System.Math.PI*x)/gamma(1-x);
+		if(x<9)return gamma(x+1)/x;
+		double lngamma=x*System.Math.Log(x+1/(12*x-1/x/10))-x+System.Math.Log(2*System.Math.PI/x)/2;
+		return System.Math.Exp(lngamma);
+}
+}
+

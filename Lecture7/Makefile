@@ -7,11 +7,16 @@ Out.Erf.gnuplot.svg : Out.txt Makefile
 	echo '\
 		set terminal svg background "white" ;\
 		set out "$@" ;\
+		set xlabel "x" ;\
+		set ylabel "Erf(x)" ;\
+		set grid ;\
+		set title "Errorfunction" ;\
+		set yrange [-5:5] ;\
+		set xrange [-5:5] ;\
 		plot \
-			"$<" with lines notitle \
-			,"erf.data.txt" using 1:2 with points pointtype 6 notitle \
-			,"erf.data.txt" using (-($$1)):(-($$2)) with points pointtype 6 notitle ;\
-	' | tee log.gpi | gnuplot
+			"$<" with lines lc "red" notitle \
+			,0 with lines lt 2 lc "black" notitle ;\
+	'|tee log.gpi | gnuplot
 
 Out.txt : main.exe
 	mono $< > $@
