@@ -8,9 +8,9 @@ Out.Erf.gnuplot.svg : Out.txt Makefile
 		set terminal svg background "white" ;\
 		set out "$@" ;\
 		plot \
-			"$<" with lines \
-			,"erf.data.txt" using 1:2 with points pointtype 6 \
-			,"erf.data.txt" using (-($$1)):(-($$2)) with points pointtype 6 ;\
+			"$<" with lines notitle \
+			,"erf.data.txt" using 1:2 with points pointtype 6 notitle \
+			,"erf.data.txt" using (-($$1)):(-($$2)) with points pointtype 6 notitle ;\
 	' | tee log.gpi | gnuplot
 
 Out.txt : main.exe
