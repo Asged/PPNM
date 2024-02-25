@@ -5,8 +5,12 @@ int.MinValue = -2147483648
 double machine epsilon = 2.22044604925031E-16
 float machine epsilon = 1.192093E-07
 a==b ? False
+ result is due to floating point arithmetic, a=1+tiny=1, and when tiny is added again it is rounded down again, b=1+epsiloilonn, since tiny+tiny is representable as epsilon
 a>1 ? False
+ result is due to arithmetic again, a is equal to exactly 1 here
 b>1 ? True
-1.11022302462516E-16
-1
-1
+ floating point arithmetic, here b=1+epsilon
+d1=7.999999999999999e-001
+d2=8.000000000000000e-001
+d1==d2 ? => False
+d1==d2 ? => True, using approx function here
