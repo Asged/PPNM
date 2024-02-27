@@ -11,18 +11,24 @@ Out.Erf.gnuplot.svg : Out.txt Makefile
 		set ylabel "Erf(x)" ;\
 		set grid ;\
 		set title "Errorfunction" ;\
-		set yrange [-5:5] ;\
-		set xrange [-5:5] ;\
 		plot \
 			"$<" with lines lc "red" notitle \
-			,0 with lines lt 2 lc "black" notitle ;\
 	'|tee log.gpi | gnuplot
 
+Out.Gamma.gnuplot.svg : Out.txt Makefile
+	echo '\
+		plot \
+			"$<" with lines lc "red" notitle \
+	'|tee log.gpi | gnuplot
 Out.txt : main.exe
+	mono $< > $@
+
+Out2.txt : main2.exe
 	mono $< > $@
 
 sfuns.dll : sfuns.cs ;$(MKLIB)
 main.exe : main.cs sfuns.dll; $(MKEXE)
+main2.exe : main2.cs sfuns.dll; $(MKEXE)
 
 clean: 
 	$(RM) *.exe *.dll [Oo]ut*  [Ll]og*
