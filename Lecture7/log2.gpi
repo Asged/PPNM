@@ -1,0 +1,10 @@
+\
+	set terminal svg background "white" ;\
+	set out "Out.Gamma.gnuplot.svg" ;\
+	set xlabel "x" ;\
+	set ylabel "Erf(x)" ;\
+	set grid ;\
+	set title "Errorfunction" ;\
+	plot \
+		"Out2.txt" with lines lc "red" notitle \
+

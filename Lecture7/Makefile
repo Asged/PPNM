@@ -3,6 +3,8 @@ LIBS = $(addprefix -reference:,$(filter %.dll,$^))
 MKEXE = mcs -target:exe -out:$@ $(LIBS) $(CODE)
 MKLIB = mcs -target:library -out:$@ $(LIBS) $(CODE)
 
+default: Out.Erf.gnuplot.svg Out.Gamma.gnuplot.svg
+
 Out.Erf.gnuplot.svg : Out.txt Makefile
 	echo '\
 		set terminal svg background "white" ;\
@@ -30,8 +32,8 @@ Out.Gamma.gnuplot.svg : Out2.txt Makefile
 
 sfuns.dll : sfuns.cs ;$(MKLIB)
 main.exe : main.cs sfuns.dll; $(MKEXE)
-main2.exe : main2.cs sfuns.dll
-	mcs -target:exe -out:main2.exe
+main2.exe : main2.cs sfuns.dll ; $(MKEXE)
+	#mcs -target:exe -out:main2.exe main2.cs -reference:sfuns.dll
 Out.txt : main.exe
 	mono $< > $@
 Out2.txt : main2.exe

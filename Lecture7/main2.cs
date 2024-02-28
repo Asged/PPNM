@@ -1,6 +1,7 @@
 class main{
         public static int Main(){
-                for(double x=-5; x<=5;x+=1.0/128){
+		double dx=1.0/16;
+                for(double x=-5+dx/2; x<=5-dx; x+=dx){
                         System.Console.WriteLine($"{x} {sfuns.gamma(x)}");
                 }//func
                 return 0;
