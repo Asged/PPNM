@@ -25,17 +25,25 @@ public static class QRGS{
 		}
 		return (Q,R);
 	}//decomp
-	public static vector solve(matrix Q, matrix R, vector b){
+	public static vector solve(matrix Q, matrix R, vector b){ //Solve for vector x
 		n = Q.size1; //no. of rows
 		vector x = new vector(n); //vector x
 			for(int i = n - 1; i >= 0; i--){ //loop for backwards substitution starting at bottom row
-			
+				double sum = 0;
+				for(int j = i+1; j<n;j++){
+					sum += x[j] * R[i, j];
+				}
+				x[i] = (b[i] - sum) / R[i, i];
 			}
 
-		return null;	
+		return x;
 	}//solve
-	public static double det(){
-		return 0;
+	public static double det(matrix R){ //Solves determinant for R matrix
+		double determinant = 1.0;
+		for (int i = 0; i<R.size1; i++){
+			determinant *= R[i,i];
+		}
+		return determinant;
 	}//det
 	public static matrix inverse(){
 		return null;
