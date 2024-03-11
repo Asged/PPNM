@@ -1,5 +1,7 @@
 class main{
 	static void Main(){
+		matrix identity4 = new matrix(4);
+		for (int i = 0; i<4;i++) identity4[i,i] = 1;
 		//Generates random matrix A
 		//int n = 5;
 		//int m = 4;
@@ -20,13 +22,16 @@ class main{
 		//Checks Q_transpose * Q = I
 		matrix I = Q.transpose() * Q;
 		I.print("Matrix I");
+		System.Console.WriteLine($"{(I).approx(identity4)}");
 
 		matrix QR = Q * R;
 		QR.print("Matrix QR");
 		System.Console.WriteLine($"A=QR: {A.approx(QR)}");
-
+		matrix identity5 = new matrix(5);
+		for (int i = 0; i<5;i++) identity5[i,i] = 1;
 		//Random square matrix and vector
 		matrix squareA = new matrix(5,5);
+		squareA.print("Square A matrix");
 		vector b = new vector(5);
 		for (int i = 0; i<squareA.size1; i++){
 			for (int j = 0; j<squareA.size2; j++){
@@ -49,6 +54,13 @@ class main{
 		vector Ax = squareA*x;
 		Ax.print("Ax");
 		System.Console.WriteLine($"{Ax.approx(b)}");
+
+		//Square matrix from before is reused
+		matrix inverseA = QRGS.inverse(squareA);
+		inverseA.print("Inverse of square A");
+		matrix squinvA = squareA*inverseA;
+		squinvA.print("A*A^-1");
+		System.Console.WriteLine($"{(squareA*inverseA).approx(identity5)}");
 	}
 }
 
@@ -87,7 +99,15 @@ public static class QRGS{
 		}
 		return determinant;
 	}//det
-	public static matrix inverse(){
-		return null;
+	public static matrix inverse(matrix A){
+		int n = A.size1;
+		matrix inverseA = new matrix(n,n);
+		for(int i = 0; i<n;i++){
+			vector e = new vector(n);
+			for (int j = 0;j<n;j++) if(i==j) e[i]=1; else e[j]=0; //Creates unit vectors
+			(matrix Q, matrix R) = decomp(A);
+			inverseA[i] = solve(Q,R,e);
+		}
+		return inverseA;
 	}//inverse
 }//QRGS
