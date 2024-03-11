@@ -1,13 +1,46 @@
 class main{
 	static void Main(){
-		vector ve;
-		ve=new vector(n:1); ve.print("ve=");
-		ve=new vector(1,2,3); ve.print("ve=");
-		ve=new vector(7,8,9,8,7); ve.print("ve=");
-		var ma=new matrix("1 2 ; 5 6");
-		ma.print();
-		(ma+ma.T).print();
-		(matrix.id(2)).print();
+		//Generates random matrix A
+		//int n = 5;
+		//int m = 4;
+		matrix A = new matrix(5,4);
+		var rnd = new System.Random(1);
+		for (int n = 0; n < A.size1;n++){
+			for (int m = 0; m < A.size2; m++){
+				A[n,m] = rnd.NextDouble();
+			}
+		}
+		A.print("Matrix A");
+
+		//QRGS Demoposition
+		(matrix Q, matrix R) = QRGS.decomp(A);
+		Q.print("Matrix Q");
+		R.print("Matrix R");
+
+		//Checks Q_transpose * Q = I
+		matrix I = Q.transpose() * Q;
+		I.print("Matrix I");
+
+		matrix QR = Q * R;
+		QR.print("Matrix QR");
+		System.Console.WriteLine($"A=QR: {A.approx(QR)}");
+
+		//Generate random vector b, A is reused
+		vector b = new vector(5);
+		for (int m = 0; m < b.size; m++) b[m] = rnd.NextDouble();
+		b.print("Vector b");
+
+		//Solving for x vector, reusing QR from above
+		vector x = QRGS.solve(Q,R,b);
+		x.print("Vector x");
+
+		//Checking x is correct
+		vector b1 = A*x;
+		System.Console.WriteLine($"Ax=b: {b1.approx(b)}");
+		b.print("b");
+		b1.print("Ax");
+		vector QRx = QR*x;
+		QRx.print("QRx");
 	}
 }
 
@@ -26,7 +59,7 @@ public static class QRGS{
 		return (Q,R);
 	}//decomp
 	public static vector solve(matrix Q, matrix R, vector b){ //Solve for vector x
-		n = Q.size1; //no. of rows
+		int n = Q.size2; //no. of rows
 		vector x = new vector(n); //vector x
 			for(int i = n - 1; i >= 0; i--){ //loop for backwards substitution starting at bottom row
 				double sum = 0;
@@ -39,7 +72,7 @@ public static class QRGS{
 		return x;
 	}//solve
 	public static double det(matrix R){ //Solves determinant for R matrix
-		double determinant = 1.0;
+		double determinant = 1.0; 
 		for (int i = 0; i<R.size1; i++){
 			determinant *= R[i,i];
 		}
