@@ -25,22 +25,32 @@ class main{
 		QR.print("Matrix QR");
 		System.Console.WriteLine($"A=QR: {A.approx(QR)}");
 
-		//Generate random vector b, A is reused
+		//Generate random vector b
+		matrix A1 = new matrix(5,5);
+		for (int n = 0; n < A1.size1;n++){
+			for (int m = 0; m < A1.size2; m++){
+				A1[n,m] = rnd.NextDouble();
+			}
+		}
 		vector b = new vector(5);
 		for (int m = 0; m < b.size; m++) b[m] = rnd.NextDouble();
-		b.print("Vector b");
+		A1.print("Square matrix A");
+		
+
+		(matrix Q1, matrix R1) = QRGS.decomp(A1);
+		matrix QR1 = Q1*R1;
+		QR1.print("QR for square A");
 
 		//Solving for x vector, reusing QR from above
-		vector x = QRGS.solve(Q,R,b);
-		x.print("Vector x");
+		vector x = QRGS.solve(Q1,R1,b);
+		b.print("Vector b");
+		vector QRx1 = Q1*(R1*x);
+		QRx1.print("Vector QRx");
+		vector Ax1 = A1*x;
+		Ax1.print("Vector Ax");
 
 		//Checking x is correct
-		vector b1 = A*x;
-		System.Console.WriteLine($"Ax=b: {b1.approx(b)}");
-		b.print("b");
-		b1.print("Ax");
-		vector QRx = QR*x;
-		QRx.print("QRx");
+		System.Console.WriteLine($"Ax=b: {(Q1*(R1*x)).approx(b)}");
 	}
 }
 
@@ -59,16 +69,15 @@ public static class QRGS{
 		return (Q,R);
 	}//decomp
 	public static vector solve(matrix Q, matrix R, vector b){ //Solve for vector x
-		int n = Q.size2; //no. of rows
+		int n = Q.size1; //no. of rows
 		vector x = new vector(n); //vector x
 			for(int i = n - 1; i >= 0; i--){ //loop for backwards substitution starting at bottom row
 				double sum = 0;
 				for(int j = i+1; j<n;j++){
-					sum += x[j] * R[i, j];
+					sum += b[j] * R[i, j];
 				}
 				x[i] = (b[i] - sum) / R[i, i];
 			}
-
 		return x;
 	}//solve
 	public static double det(matrix R){ //Solves determinant for R matrix
