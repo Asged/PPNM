@@ -25,32 +25,30 @@ class main{
 		QR.print("Matrix QR");
 		System.Console.WriteLine($"A=QR: {A.approx(QR)}");
 
-		//Generate random vector b
-		matrix A1 = new matrix(5,5);
-		for (int n = 0; n < A1.size1;n++){
-			for (int m = 0; m < A1.size2; m++){
-				A1[n,m] = rnd.NextDouble();
-			}
-		}
+		//Random square matrix and vector
+		matrix squareA = new matrix(5,5);
 		vector b = new vector(5);
-		for (int m = 0; m < b.size; m++) b[m] = rnd.NextDouble();
-		A1.print("Square matrix A");
-		
+		for (int i = 0; i<squareA.size1; i++){
+			for (int j = 0; j<squareA.size2; j++){
+				squareA[i,j] = rnd.NextDouble();
+			}
+		}		
+		for (int i = 0; i<b.size; i++){
+			b[i] = rnd.NextDouble();
+		}
+		squareA.print("Square A matrix");
+		b.print("b Vector");
 
-		(matrix Q1, matrix R1) = QRGS.decomp(A1);
-		matrix QR1 = Q1*R1;
-		QR1.print("QR for square A");
+		//QR-decomposition
+		(matrix squareQ, matrix squareR) = QRGS.decomp(squareA);
+		squareQ.print("Square Q matrix");
+		squareR.print("Square R matrix");
 
-		//Solving for x vector, reusing QR from above
-		vector x = QRGS.solve(Q1,R1,b);
-		b.print("Vector b");
-		vector QRx1 = Q1*(R1*x);
-		QRx1.print("Vector QRx");
-		vector Ax1 = A1*x;
-		Ax1.print("Vector Ax");
-
-		//Checking x is correct
-		System.Console.WriteLine($"Ax=b: {(Q1*(R1*x)).approx(b)}");
+		//Solve for x
+		vector x = QRGS.solve(squareQ,squareR,b);
+		vector Ax = squareA*x;
+		Ax.print("Ax");
+		System.Console.WriteLine($"{Ax.approx(b)}");
 	}
 }
 
@@ -68,17 +66,19 @@ public static class QRGS{
 		}
 		return (Q,R);
 	}//decomp
-	public static vector solve(matrix Q, matrix R, vector b){ //Solve for vector x
-		int n = Q.size1; //no. of rows
-		vector x = new vector(n); //vector x
-			for(int i = n - 1; i >= 0; i--){ //loop for backwards substitution starting at bottom row
-				double sum = 0;
-				for(int j = i+1; j<n;j++){
-					sum += b[j] * R[i, j];
-				}
-				x[i] = (b[i] - sum) / R[i, i];
+	public static vector solve(matrix Q, matrix R, vector b){ //Solve for vector x using Rx = Q_transposed*b
+		int n = Q.size1;
+		vector QTb = Q.transpose() * b;  // Q_transposed * b
+		for(int i = n-1; i>=0;i--){
+			double sum = 0;
+			for(int j = i+1; j<n; j++){
+				sum += R[i,j] * QTb[j];
 			}
-		return x;
+			QTb[i] = (QTb[i] - sum)/R[i,i];
+		}
+
+		
+		return QTb;
 	}//solve
 	public static double det(matrix R){ //Solves determinant for R matrix
 		double determinant = 1.0; 
