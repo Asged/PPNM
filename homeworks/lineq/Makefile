@@ -13,6 +13,13 @@ all: out.txt; cat $<
 out.txt: main.exe
 		$(RUN) $< > $@
 
+out.times.data : main.exe
+	>$@
+	for N in $$(seq 100 20 200); do \
+		time --format "$$N %e" --output $@ --append \
+		mono $< -size:$$N 1>out 2>err ;\
+	done
+
 main.exe: main.cs matrix.dll
 		$(CSC) -reference:$(word 2,$^) $<
 
