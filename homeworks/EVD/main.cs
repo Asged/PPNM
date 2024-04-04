@@ -27,8 +27,8 @@ public static void timesJ(matrix A, int p, int q, double theta){
     for(int i = 0; i<A.size1; i++){
         double aip = A[i,p];
         double aiq = A[i,q];
-        A[i,p] = c*aip + s*aiq; 
-        A[i,q] = -s*aip + c*aiq; 
+        A[i,p] = c*aip - s*aiq; 
+        A[i,q] = s*aip + c*aiq; 
     }
     }
 public static void Jtimes(matrix A, int p, int q, double theta){
@@ -49,6 +49,7 @@ public static (vector,matrix) cyclic(matrix M){
 	bool changed;
     do{
 	changed=false;
+    const double epsilon = 1e-6;
 	for(int p=0;p<n-1;p++){
 	    for(int q=p+1;q<n;q++){
 		    double apq=A[p,q], app=A[p,p], aqq=A[q,q];
@@ -56,7 +57,7 @@ public static (vector,matrix) cyclic(matrix M){
 		    double c=System.Math.Cos(theta),s=System.Math.Sin(theta); //Cos and Sin of theta
 		    double new_app=c*c*app-2*s*c*apq+s*s*aqq; //A'_pp
 		    double new_aqq=s*s*app+2*s*c*apq+c*c*aqq; //A'_qq
-		    if(new_app!=app || new_aqq!=aqq) // do rotation
+		    if (System.Math.Abs(new_app - app) > epsilon || System.Math.Abs(new_aqq - aqq) > epsilon) // do rotation
 			    {
 			    changed=true;
 			    timesJ(A,p,q, theta); // A←A*J 
