@@ -78,6 +78,7 @@ public static class QRGS{
 		}
 		return (Q,R);
 	}//decomp
+	
 	public static vector solve(matrix Q, matrix R, vector b){ //Solve for vector x using Rx = Q_transposed*b
 		int n = Q.size1;
 		vector QTb = Q.transpose() * b;  // Q_transposed * b
@@ -92,6 +93,7 @@ public static class QRGS{
 		
 		return QTb;
 	}//solve
+
 	public static double det(matrix R){ //Solves determinant for R matrix
 		double determinant = 1.0; 
 		for (int i = 0; i<R.size1; i++){
@@ -99,6 +101,7 @@ public static class QRGS{
 		}
 		return determinant;
 	}//det
+
 	public static matrix inverse(matrix A){
 		int n = A.size1;
 		matrix inverseA = new matrix(n,n);
