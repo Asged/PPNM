@@ -10,12 +10,23 @@ class main{
                 A[j,i] = A[i,j]; // Upper triangular part is copied to lower part
             }
         }
-        A.print();
-        jacobi.timesJ(A,0,1,System.Math.PI/4);
-        jacobi.Jtimes(A,0,1,System.Math.PI/4);
-        A.print(); // J^T(A)J
 
-        //jacobi.cyclic(A);
+        A.print();
+        
+        vector w;
+        matrix V;
+        (w,V) = jacobi.cyclic(A);
+        //jacobi.timesJ(A,0,1,System.Math.PI/4);
+        //jacobi.Jtimes(A,0,1,System.Math.PI/4);
+        A.print(); // J^T(A)J
+        V.print();
+        System.Console.WriteLine();
+        w.print();
+        matrix VTAV;
+        VTAV = V.transpose()*A*V;
+        VTAV.print();
+
+        
     }
 }
 
@@ -27,8 +38,8 @@ public static void timesJ(matrix A, int p, int q, double theta){
     for(int i = 0; i<A.size1; i++){
         double aip = A[i,p];
         double aiq = A[i,q];
-        A[i,p] = c*aip + s*aiq; 
-        A[i,q] = -s*aip + c*aiq; 
+        A[i,p] = c*aip - s*aiq; 
+        A[i,q] = s*aip + c*aiq; 
     }
     }
 public static void Jtimes(matrix A, int p, int q, double theta){
@@ -63,9 +74,11 @@ public static (vector,matrix) cyclic(matrix M){
 			    Jtimes(A,p,q,-theta); // A←JT*A 
 			    timesJ(V,p,q, theta); // V←V*J
 			    }
+            
 	    }
     }
     }while(changed);
+    for (int i = 0; i<n;i++) w[i] = V[i,i];
 	return (w,V);
 	}
 }
