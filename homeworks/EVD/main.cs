@@ -10,21 +10,44 @@ class main{
                 A[j,i] = A[i,j]; // Upper triangular part is copied to lower part
             }
         }
-
+        System.Console.Write("Matrix A");
         A.print();
-        
+
+
         vector w;
         matrix V;
         (w,V) = jacobi.cyclic(A);
-        //jacobi.timesJ(A,0,1,System.Math.PI/4);
-        //jacobi.Jtimes(A,0,1,System.Math.PI/4);
-        A.print(); // J^T(A)J
+        
+        System.Console.Write("Matrix V");
         V.print();
         System.Console.WriteLine();
+
+        System.Console.WriteLine("Vector w");
         w.print();
+
         matrix VTAV;
         VTAV = V.transpose()*A*V;
-        VTAV.print();
+        System.Console.WriteLine("Diagonal Matrix D");
+        VTAV.print(); //This is indeed a Diagonal Matrix. Check 
+
+        matrix A_0 = V*VTAV*V.transpose();
+        System.Console.WriteLine("");
+        System.Console.WriteLine("V*D*V_transpose");
+        A_0.print(); //This seems equal
+        
+        System.Console.WriteLine($"Does VDV_transpose=A?");
+        System.Console.WriteLine(A.approx(A_0)); //Output is true
+
+        matrix VTV = V.transpose()*V;
+        VTV.print();
+        matrix id = matrix.id(5);
+        System.Console.WriteLine($"Does V_transpose*V = Identity Matrix?");
+        System.Console.WriteLine(VTV.approx(id)); //Output is true
+
+        matrix VVT = V*V.transpose();
+        VVT.print();
+        System.Console.WriteLine($"Does V*V_transpose = Identity Matrix?");
+        System.Console.WriteLine(VVT.approx(id)); //Output is true
 
         
     }
