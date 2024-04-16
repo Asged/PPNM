@@ -1,5 +1,5 @@
 class main{
-    static void Main(){
+    static void Main(double rmax, double dr){
         //Testing with timesJ and JTimes with non random matrices
         matrix A = new matrix(5,5);
         var rnd = new System.Random(1);
@@ -49,7 +49,25 @@ class main{
         System.Console.WriteLine($"Does V*V_transpose = Identity Matrix?");
         System.Console.WriteLine(VVT.approx(id)); //Output is true
 
-        
+        //Part B
+        //Building  Hamiltonian  matrix
+        int npoints = (int)(rmax/dr)-1;
+        System.Console.WriteLine(npoints);
+        vector r = new vector(npoints);
+        for(int i=0;i<npoints;i++)r[i]=dr*(i+1);
+        matrix H = new matrix(npoints,npoints);
+        for(int i=0;i<npoints-1;i++){
+            H[i,i]  =-2*(-0.5/dr/dr);
+            H[i,i+1]= 1*(-0.5/dr/dr);
+            H[i+1,i]= 1*(-0.5/dr/dr);
+        }
+        H[npoints-1,npoints-1]=-2*(-0.5/dr/dr);
+        for(int i=0;i<npoints;i++)H[i,i]+=-1/r[i];
+        H.print();
+        //Diagonalization
+        //(w,V_H) = jacobi.cyclic(H);
+        //D_H = V_H*transpose()*H*V_H;
+        //D_H.print();
     }
 }
 
