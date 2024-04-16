@@ -1,5 +1,32 @@
 class main{
-    static void Main(double rmax, double dr){
+    static void Main(string[] args){
+        int rmax = 0;
+        double dr = 0.0;
+
+        foreach(string arg in args){ //Parsing rmax and dr to numbers
+            string[] values = arg.Split(':');
+            
+            
+                string key = values[0];
+                string value = values[1];
+                System.Console.WriteLine(key);
+                System.Console.WriteLine(value);
+                if(key=="-rmax"){
+                    int.TryParse(value, out int rmaxVal);
+                    rmax = rmaxVal;
+                    System.Console.WriteLine(rmaxVal);
+                }
+
+                else if(key=="-dr"){
+                    double.TryParse(value, out double drVal);
+                    dr = drVal;
+                    System.Console.WriteLine(drVal);
+                }   
+            
+        }
+        System.Console.WriteLine($"rmax: {rmax}, dr: {dr}");
+        
+        
         //Testing with timesJ and JTimes with non random matrices
         matrix A = new matrix(5,5);
         var rnd = new System.Random(1);
@@ -52,22 +79,22 @@ class main{
         //Part B
         //Building  Hamiltonian  matrix
         int npoints = (int)(rmax/dr)-1;
-        System.Console.WriteLine(npoints);
-        vector r = new vector(npoints);
-        for(int i=0;i<npoints;i++)r[i]=dr*(i+1);
+        vector r = new vector(npoints); //Initializing vector and matrix
         matrix H = new matrix(npoints,npoints);
-        for(int i=0;i<npoints-1;i++){
+        for(int i=0;i<npoints;i++){ //Populating r
+            r[i]=dr*(i+1);
+        }
+        
+        for(int i=0;i<npoints-1;i++){ //Populating H
             H[i,i]  =-2*(-0.5/dr/dr);
             H[i,i+1]= 1*(-0.5/dr/dr);
             H[i+1,i]= 1*(-0.5/dr/dr);
         }
+
         H[npoints-1,npoints-1]=-2*(-0.5/dr/dr);
         for(int i=0;i<npoints;i++)H[i,i]+=-1/r[i];
         H.print();
-        //Diagonalization
-        //(w,V_H) = jacobi.cyclic(H);
-        //D_H = V_H*transpose()*H*V_H;
-        //D_H.print();
+        System.Console.WriteLine(H[0,0]);
     }
 }
 
