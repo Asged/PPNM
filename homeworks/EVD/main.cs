@@ -5,8 +5,6 @@ class main{
 
         foreach(string arg in args){ //Parsing rmax and dr to numbers
             string[] values = arg.Split(':');
-            
-            
                 string key = values[0];
                 string value = values[1];
                 System.Console.WriteLine(key);
@@ -37,19 +35,18 @@ class main{
                 A[j,i] = A[i,j]; // Upper triangular part is copied to lower part
             }
         }
-        System.Console.Write("Matrix A");
+        System.Console.Write("Random matrix A");
         A.print();
-
 
         vector w;
         matrix V;
         (w,V) = jacobi.cyclic(A);
         
-        System.Console.Write("Matrix V");
+        System.Console.Write("Matrix V consisting of eigenvectors");
         V.print();
         System.Console.WriteLine();
 
-        System.Console.WriteLine("Vector w");
+        System.Console.WriteLine("Vector w consisting of eigenvalues");
         w.print();
 
         matrix VTAV;
@@ -95,6 +92,13 @@ class main{
         for(int i=0;i<npoints;i++)H[i,i]+=-1/r[i];
         H.print();
         System.Console.WriteLine(H[0,0]);
+
+        //Diagonalizing H
+        matrix VH;
+        vector wH;
+        (wH,VH) = jacobi.cyclic(H);
+        matrix HD = VH.transpose()*H*VH;
+        HD.print();
     }
 }
 

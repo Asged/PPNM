@@ -11,7 +11,8 @@ CSC=$(DOTNET) $(CSCPATH) -reference:$(NETSTANDARD)
 all: out.txt; cat $<
 
 out.txt: main.exe
-		$(RUN) $< > $@
+	$(RUN) $< > $@ 2>&1
+
 
 main.exe: main.cs matrix.dll
 		$(CSC) -reference:$(word 2,$^) $<
