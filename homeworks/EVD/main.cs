@@ -1,24 +1,20 @@
 class main{
     static void Main(string[] args){
-        int rmax = 0;
-        double dr = 0.0;
+        int rmax = 10; //Initial values so program compiles without error
+        double dr = 0.5;
 
         foreach(string arg in args){ //Parsing rmax and dr to numbers
             string[] values = arg.Split(':');
                 string key = values[0];
                 string value = values[1];
-                System.Console.WriteLine(key);
-                System.Console.WriteLine(value);
                 if(key=="-rmax"){
                     int.TryParse(value, out int rmaxVal);
                     rmax = rmaxVal;
-                    System.Console.WriteLine(rmaxVal);
                 }
 
-                else if(key=="-dr"){
+                if(key=="-dr"){
                     double.TryParse(value, out double drVal);
                     dr = drVal;
-                    System.Console.WriteLine(drVal);
                 }   
             
         }
@@ -54,6 +50,7 @@ class main{
         D.print();
         System.Console.WriteLine("");
 
+        //Testing that that Jacobi routine works as intended
         System.Console.WriteLine("Does V_transpose*A*V=D");
         System.Console.WriteLine((V.transpose()*A*V).approx(D)); //Output is true
         System.Console.WriteLine("");
@@ -70,7 +67,7 @@ class main{
         System.Console.WriteLine("Does V_transpose*V=IdMatrix");
         System.Console.WriteLine((V.transpose()*V).approx(id)); //Output is true
 
-        /*
+        
         //Part B
         //Building  Hamiltonian  matrix
         int npoints = (int)(rmax/dr)-1;
@@ -92,12 +89,21 @@ class main{
         System.Console.WriteLine(H[0,0]);
 
         //Diagonalizing H
-        matrix VH;
-        vector wH;
-        (wH,VH) = jacobi.cyclic(H);
-        matrix HD = VH.transpose()*H*VH;
-        HD.print();
-        */
+        vector wH; //Vector with eigenvalues
+        matrix DH; //Diagonalized H
+        matrix VH; //Matrix with eigenvectors for H
+        (wH,DH,VH) = jacobi.cyclic(H);
+        DH.print();
+        
+        //Writing calculations to txt files
+        System.Console.WriteLine(dr);
+        var drFile = new System.IO.StreamWriter("drVariation.txt", append:true);
+        drFile.WriteLine($"{dr} {wH[0]}");
+        drFile.Close(); 
+
+        var rmaxFile = new System.IO.StreamWriter("rmaxVariation.txt", append:true);
+        rmaxFile.WriteLine($"{rmax} {wH[0]}");
+        rmaxFile.Close(); 
     }
 }
 
