@@ -40,7 +40,8 @@ class main{
 
         vector w;
         matrix V;
-        (w,V) = jacobi.cyclic(A);
+        matrix D;
+        (w,D,V) = jacobi.cyclic(A);
         
         System.Console.Write("Matrix V consisting of eigenvectors");
         V.print();
@@ -49,30 +50,27 @@ class main{
         System.Console.WriteLine("Vector w consisting of eigenvalues");
         w.print();
 
-        matrix VTAV;
-        VTAV = V.transpose()*A*V;
         System.Console.WriteLine("Diagonal Matrix D");
-        VTAV.print(); //This is indeed a Diagonal Matrix. Check 
-
-        matrix A_0 = V*VTAV*V.transpose();
+        D.print();
         System.Console.WriteLine("");
-        System.Console.WriteLine("V*D*V_transpose");
-        A_0.print(); //This seems equal
-        
-        System.Console.WriteLine($"Does VDV_transpose=A?");
-        System.Console.WriteLine(A.approx(A_0)); //Output is true
 
-        matrix VTV = V.transpose()*V;
-        VTV.print();
+        System.Console.WriteLine("Does V_transpose*A*V=D");
+        System.Console.WriteLine((V.transpose()*A*V).approx(D)); //Output is true
+        System.Console.WriteLine("");
+
+        System.Console.WriteLine("Does V*D*V_transpose=A");
+        System.Console.WriteLine((V*D*V.transpose()).approx(A)); //Output is true
+        System.Console.WriteLine("");
+
         matrix id = matrix.id(5);
-        System.Console.WriteLine($"Does V_transpose*V = Identity Matrix?");
-        System.Console.WriteLine(VTV.approx(id)); //Output is true
+        System.Console.WriteLine("Does V*V_transpose=IdMatrix");
+        System.Console.WriteLine((V*V.transpose()).approx(id)); //Output is true
+        System.Console.WriteLine("");
 
-        matrix VVT = V*V.transpose();
-        VVT.print();
-        System.Console.WriteLine($"Does V*V_transpose = Identity Matrix?");
-        System.Console.WriteLine(VVT.approx(id)); //Output is true
+        System.Console.WriteLine("Does V_transpose*V=IdMatrix");
+        System.Console.WriteLine((V.transpose()*V).approx(id)); //Output is true
 
+        /*
         //Part B
         //Building  Hamiltonian  matrix
         int npoints = (int)(rmax/dr)-1;
@@ -99,6 +97,7 @@ class main{
         (wH,VH) = jacobi.cyclic(H);
         matrix HD = VH.transpose()*H*VH;
         HD.print();
+        */
     }
 }
 
@@ -124,7 +123,7 @@ public static void Jtimes(matrix A, int p, int q, double theta){
         A[q,j] = -s*apj + c*aqj; 
     }
     }
-public static (vector,matrix) cyclic(matrix M){
+public static (vector,matrix, matrix) cyclic(matrix M){
 	matrix A=M.copy();
 	matrix V=matrix.id(M.size1);
 	vector w=new vector(M.size1);
@@ -151,7 +150,7 @@ public static (vector,matrix) cyclic(matrix M){
 	    }
     }
     }while(changed);
-    for (int i = 0; i<n;i++) w[i] = V[i,i];
-	return (w,V);
+    for (int i = 0; i<n;i++) w[i] = A[i,i]; //copies eigenvalues to vector w
+	return (w,A,V); //w=vector with eigenvalues, A=matrix with only diagonal elements, V=matrix with eigenvectors
 	}
 }
