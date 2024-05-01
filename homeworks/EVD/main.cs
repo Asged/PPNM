@@ -1,7 +1,7 @@
 class main{
     static void Main(string[] args){
-        int rmax = 10; //Initial values so program compiles without error
-        double dr = 0.5;
+        int rmax = 10;
+        double dr = 0.3;
 
         foreach(string arg in args){ //Parsing rmax and dr to numbers
             string[] values = arg.Split(':');
