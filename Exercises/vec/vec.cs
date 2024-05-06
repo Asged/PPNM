@@ -63,6 +63,6 @@ public class vec{
     public static bool approx(vec u, vec v) => u.approx(v);
     
     public override string ToString(){
-    	return $"{x}, {y}, {z},";
+    	return $"{x}, {y}, {z}";
     }
 }

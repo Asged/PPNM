@@ -18,8 +18,11 @@ drVariation.txt : main.exe Makefile
 	done; \
 
 rmaxVariation.txt : main.exe Makefile
+	>$@
+	>log.dr
 	for rmaxV in $$(seq 1 1 20); do \
-		mono main.exe -rmax:$$rmaxV -dr:0.3 >> rmaxVariation.txt; \
+		echo $$rmaxV; \
+		mono main.exe -rmax:$$rmaxV -dr:0.3 >> log.rmax; \
 	done; \
 
 target:

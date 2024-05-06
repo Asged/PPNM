@@ -1,9 +1,17 @@
-v = 1, 2, 3,
-u = 1, 2, 3,
-neg_v = -1, -2, -3,
-neg_u = -3, -2, -1,
-v*2 = 2, 4, 6,
-v*2.5 = 2.5, 5, 7.5,
-v*-3.0 = -3, -6, -9,
-v*2.0 = -2, -4, -6,
-v*-2.0 = 2, 4, 6,
+ToString method for constructed vectors
+v = 1, 2, 3
+u = 1, 2, 3
+-v = -1, -2, -3
+-u = -3, -2, -1
+
+Testing if scalar operator works as intended
+v*2 = 2, 4, 6
+v*2.5 = 2.5, 5, 7.5
+v*-3.0 = -3, -6, -9
+v*2.0 = -2, -4, -6
+v*2.5 = -2.5, -5, -7.5
+v*-2.0 = 2.5, 5, 7.5
+Does v*(-1) = -v: True
+Does -v = v*(-1): True
+
+Testing if + operator works as intended
