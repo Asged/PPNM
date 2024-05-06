@@ -18,6 +18,10 @@ public static double   abs(complex z){
 	else if(x>y){ double t=y/x; return x*sqrt(1+t*t); }
 	else        { double t=x/y; return y*sqrt(t*t+1); }
 	}
+//Implementing sinh and cosh
+public static complex sinh(complex x) {return (exp(x) - exp(-x)) / 2;}
+public static complex cosh(complex x) {return (exp(x) + exp(-x)) / 2;}
+
 public static complex pow(this complex z, double x ) => exp(log(z)*x);
 public static complex pow(this complex z, complex w) => exp(log(z)*w);
 
@@ -29,6 +33,8 @@ public static double log(double x){return Math.Log(x);}
 public static double sqrt(double x){return Math.Sqrt(x);}
 public static double pow(this double x, double y){return Math.Pow (x,y);}
 public static double pow(this double x, int n   ){return Math.Pow (x,n);}
+
+
 
 public static bool approx
 (this double x, double y, double abserr=1e-9, double relerr=1e-9){

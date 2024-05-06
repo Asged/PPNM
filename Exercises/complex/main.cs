@@ -56,7 +56,22 @@ static class main{
                 System.Console.WriteLine($"sin(i*pi)=Re:{real6}+Im:{imag6}");
                 System.Console.WriteLine($"approx for real part: {cmath.approx(0,real6)}");
                 System.Console.WriteLine($"approx for imaginary part: {cmath.approx(11.5487393572,imag6)}");
-
+		//sinh(i)
+				z = new complex(0,1);
+                complex c7 = cmath.sinh(z);
+                double real7 = c7.Re;
+                double imag7 = c7.Im;
+				System.Console.WriteLine($"sinh(i)=Re:{real7}+Im:{imag7}");
+                System.Console.WriteLine($"approx for real part: {cmath.approx(0,real7)}");
+                System.Console.WriteLine($"approx for imaginary part: {cmath.approx(0.84147098480789,imag7)}");
+		//cosh(I)
+				z = new complex(0,1);
+                complex c8 = cmath.cosh(z);
+                double real8 = c8.Re;
+                double imag8 = c8.Im;
+				System.Console.WriteLine($"sinh(i)=Re:{real8}+Im:{imag8}");
+                System.Console.WriteLine($"approx for real part: {cmath.approx(0.540302305868139,real8)}");
+                System.Console.WriteLine($"approx for imaginary part: {cmath.approx(0,imag8)}");
 
 	}//Main
 }//main
