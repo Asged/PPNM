@@ -40,8 +40,6 @@ public class harmdata{public int a,b; public double sum;}
 		foreach(harmdata datum in data)total+=datum.sum;
 		System.Console.WriteLine($"Main: total sum = {total}");
 
-
-
 		
 		return 0;
 	}//Main

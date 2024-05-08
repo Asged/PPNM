@@ -8,7 +8,7 @@ public class main{
         
         double sum=0;
         System.Threading.Tasks.Parallel.For( 1, N+1, (int i) => sum+=1.0/i );
-        System.Console.WriteLine(sum);
+        System.Console.WriteLine($"Total sum{sum}");
         System.Console.WriteLine(N);
     }
 }

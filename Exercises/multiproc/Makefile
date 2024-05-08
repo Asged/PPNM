@@ -19,13 +19,16 @@ out.times.txt : main.exe Makefile
 	for nthreads in $$(seq 1 2); do\
 		$(TIME) mono main.exe -nthreads:$$nthreads -nterms:$(N); \
 	done
-
 out2.times.txt : main2.exe Makefile
-	>$@ $(TIME) mono main2.exe
+	>$@ $(TIME) mono main2.exe -nterms:$N
+out3.times.txt : main3.exe Makefile
+	>$@ $(TIME) mono main3.exe -nterms:$N
 
 main.exe : main.cs; 
-
+	$(MKEXE)
 main2.exe : main2.cs
+	$(MKEXE)
+main3.exe : main3.cs
 	$(MKEXE)
 
 test : out1 out2 out3 out4
