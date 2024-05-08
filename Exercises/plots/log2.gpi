@@ -1,0 +1,11 @@
+\
+	set terminal svg background "white" ;\
+	set out "Out.Gamma.gnuplot.svg" ;\
+	set xlabel "x" ;\
+	set ylabel "Gamma(x)" ;\
+	set yrange [-5:5] ;\
+	set grid ;\
+	set title "Gamma Function" ;\
+	plot \
+		"Out2.txt" with lines lc "red" notitle \
+
