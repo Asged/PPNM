@@ -33,10 +33,13 @@ main3.exe : main3.cs
 
 test : out1 out2 out3 out4
 
-out1 : main.exe ; mono $< -nthreads:1 -nterms:2e8 > $@
-out2 : main.exe ; mono $< -nthreads:2 -nterms:2e8 > $@
-out3 : main.exe ; mono $< -nthreads:3 -nterms:2e8 > $@
-out4 : main.exe ; mono $< -nthreads:4 -nterms:2e8 > $@
+N=1e8
+Out.txt : main.exe Makefile
+	>$@
+	$(TIME) mono $< -terms:$N -threads:1 >>$@
+	$(TIME) mono $< -terms:$N -threads:2 >>$@
+	$(TIME) mono $< -terms:$N -threads:3 >>$@
+	$(TIME) mono $< -terms:$N -threads:4 >>$@
 
 clean :
 	$(RM) *.exe *.dll [Oo]ut* [Ll]og*
