@@ -9,6 +9,7 @@ public class main{
         double sum=0;
         System.Threading.Tasks.Parallel.For( 1, N+1, (int i) => sum+=1.0/i );
         System.Console.WriteLine($"Total sum{sum}");
-        System.Console.WriteLine(N);
+        System.Console.WriteLine($"Number of iterations: {N}");
+        System.Console.WriteLine("This process is slower, this is due to a race condition arising when initializing \"double sum=0;\" herefrom the threads will all have access to the same sum variable and might cancel each others operations");
     }
 }

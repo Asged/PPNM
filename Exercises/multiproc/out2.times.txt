@@ -1,3 +1,4 @@
-Total sum14.5462233467663
-1000000000
- 5.35 58.13
+Total sum14.4777447846732
+Number of iterations: 1000000000
+This process is slower, this is due to a race condition arising when initializing "double sum=0;" herefrom the threads will all have access to the same sum variable and might cancel each others operations
+ 5.24 57.41

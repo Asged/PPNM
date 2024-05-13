@@ -16,7 +16,7 @@ Out.times.svg : out.times.txt
 N = 1e9
 out.times.txt : main.exe Makefile
 	>$@
-	for nthreads in $$(seq 1 2); do\
+	for nthreads in $$(seq 1 16); do\
 		$(TIME) mono main.exe -nthreads:$$nthreads -nterms:$(N); \
 	done
 out2.times.txt : main2.exe Makefile
