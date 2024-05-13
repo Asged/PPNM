@@ -15,3 +15,17 @@ Does v*(-1) = -v: True
 Does -v = v*(-1): True
 
 Testing if + operator works as intended
+v+v = 2, 4, 6
+v+u = 4, 4, 4
+v+(-v) = 0, 0, 0
+
+Testing if - operator works as intended
+v-v = 0, 0, 0
+v-u = -2, 0, 2
+v-(-v) = 2, 4, 6
+
+Testing if dot operator works as intended
+v(dot)v = 14
+v(dot)u = 10
+v(dot)(-v) = -14
+v*(-1).approx(-v) = True

@@ -1,4 +1,4 @@
-	Out.txt : main.exe
+Out.txt : main.exe
 	mono main.exe > Out.txt
 
 main.exe: main.cs vec.dll
@@ -7,4 +7,5 @@ main.exe: main.cs vec.dll
 vec.dll : vec.cs
 	mcs -target:library -out:vec.dll vec.cs
 
-
+clean:
+	rm -f Out.txt main.exe vec.dll

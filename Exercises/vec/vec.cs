@@ -41,13 +41,10 @@ public class vec{
         this.print("");
     }
 
-    public double dot(vec other){
-        return this.x*other.x + this.y*other.y + this.z*other.z;
-    }
-
-    public static double dot(vec v, vec u){
-        return v.x*u.x +  v.y*u.y +  v.z*u.z;
-    }
+    public double dot(vec other) /* to be called as u.dot(v) */
+	{return this.x*other.x+this.y*other.y+this.z*other.z;}
+    public static double dot(vec v,vec w) /* to be called as vec.dot(u,v) */
+	{return v.x*w.x+v.y*w.y+v.z*w.z;}
 
     static bool approx(double a,double b,double acc=1e-9,double eps=1e-9){
     	if(System.Math.Abs(a-b)<acc)return true;

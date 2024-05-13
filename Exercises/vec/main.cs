@@ -37,8 +37,26 @@ public class main {
 		//Testing of plus operator
 		System.Console.WriteLine("");
 		System.Console.WriteLine("Testing if + operator works as intended");
+		System.Console.WriteLine($"v+v = {(v + v).ToString()}");
+		System.Console.WriteLine($"v+u = {(v + u).ToString()}");
+		System.Console.WriteLine($"v+(-v) = {(v + neg_v).ToString()}");
+
+		//Testing of minus operator
+		System.Console.WriteLine("");
+		System.Console.WriteLine("Testing if - operator works as intended");
+		System.Console.WriteLine($"v-v = {(v - v).ToString()}");
+		System.Console.WriteLine($"v-u = {(v - u).ToString()}");
+		System.Console.WriteLine($"v-(-v) = {(v - neg_v).ToString()}");
+
+		//Testing of dot operator
+		System.Console.WriteLine("");
+		System.Console.WriteLine("Testing if dot operator works as intended");
+		System.Console.WriteLine($"v(dot)v = {(vec.dot(v,v)).ToString()}");
+		System.Console.WriteLine($"v(dot)u = {(vec.dot(v,u)).ToString()}");
+		System.Console.WriteLine($"v(dot)(-v) = {(vec.dot(v,neg_v)).ToString()}");
 		
-		
+		//Testing of approx
+		System.Console.WriteLine($"v*(-1).approx(-v) = {(vec.approx(v*-1,neg_v)).ToString()}");
 		return 0;
 	}
 }
