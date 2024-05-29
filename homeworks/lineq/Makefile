@@ -20,11 +20,16 @@ out.times.data : main.exe
 		mono $< -size:$$N 1>out 2>err ;\
 	done
 
-main.exe: main.cs matrix.dll
+main.exe: main.cs QRGS.dll matrix.dll
 		$(CSC) -reference:$(word 2,$^) $<
 
 matrix.dll : vector.cs matrix.cs
 		$(CSC) -target:library -out:$@ $^
+
+QRGS.dll : QRGS.cs matrix.cs vector.cs
+		$(CSC) -target:library -out:$@ $^
+
+
 
 clean:
 		$(RM) *.dll *.exe [Oo]ut*
