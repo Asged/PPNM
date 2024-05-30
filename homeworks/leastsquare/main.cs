@@ -25,7 +25,7 @@ public class main{
         }
 
         var fs = new Func<double,double>[] { z => 1.0, z => z, z => z*z };
-        //var res = leastsquare.lsfit(fs, x, y, dy);
-
+        var res = leastsquare.lsfit(fs, x, y, dy);
+        Console.WriteLine(res);
     }
 }

@@ -13,13 +13,10 @@ all: out.txt; cat $<
 out.txt: main.exe
 		$(RUN) $< > $@
 
-main.exe: main.cs QRGS.dll matrix.dll
+main.exe: main.cs leastsquare.dll
 		$(CSC) -reference:$(word 2,$^) $<
 
-matrix.dll : vector.cs matrix.cs
-		$(CSC) -target:library -out:$@ $^
-
-QRGS.dll : QRGS.cs matrix.cs vector.cs
+leastsquare.dll : leastsquare.cs QRGS.cs matrix.cs vector.cs
 		$(CSC) -target:library -out:$@ $^
 
 rad.gnuplot.svg : radData.txt Makefile
@@ -31,7 +28,7 @@ rad.gnuplot.svg : radData.txt Makefile
 		set grid ;\
 		set title "Errorfunction" ;\
 		plot \
-			"radData.txt" with lines lc "red" notitle \
+			"radData.txt" with yerrorbars lt 7 lc rgb "purple" pointsize 1 notitle \
 	'|tee log.gpi | gnuplot
 
 

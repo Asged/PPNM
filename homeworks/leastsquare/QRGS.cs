@@ -1,4 +1,4 @@
-public static class QRGS{
+public class QRGS{
 	public static (matrix,matrix) decomp (matrix A){
 		matrix Q = A.copy(); //creates a copy of A and saves in Q, useful since the colums of q_i = a_i / norm of a_i
 		matrix R = new matrix(A.size2,A.size2); //create a new square matrix
