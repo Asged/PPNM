@@ -1,11 +1,10 @@
 \
 	set terminal svg background "white" ;\
-	set out "radDecay.gnuplot.svg" ;\
+	set out "rad.gnuplot.svg" ;\
 	set xlabel "x" ;\
-	set ylabel "Gamma(x)" ;\
-	set yrange [0:120] ;\
+	set ylabel "rel" ;\
 	set grid ;\
-	set title "Gamma Function" ;\
+	set title "Errorfunction" ;\
 	plot \
-		"radData.txt" with yerrorbars points pt 7 lc "blue" ps 1 title "Data Points"\
+		"radData.txt" with lines lc "red" notitle \
 

@@ -22,20 +22,21 @@ matrix.dll : vector.cs matrix.cs
 QRGS.dll : QRGS.cs matrix.cs vector.cs
 		$(CSC) -target:library -out:$@ $^
 
-radDecaygnuplot.svg : Makefile
+rad.gnuplot.svg : radData.txt Makefile
 	echo '\
 		set terminal svg background "white" ;\
-		set out "radDecay.gnuplot.svg" ;\
+		set out "$@" ;\
 		set xlabel "x" ;\
-		set ylabel "Gamma(x)" ;\
-		set yrange [0:120] ;\
+		set ylabel "rel" ;\
 		set grid ;\
-		set title "Gamma Function" ;\
+		set title "Errorfunction" ;\
 		plot \
-			"radData.txt" with yerrorbars points pt 7 lc "blue" ps 1 title "Data Points"\
+			"radData.txt" with lines lc "red" notitle \
 	'|tee log.gpi | gnuplot
 
 
+
+
 clean:
-		$(RM) *.dll *.exe [Oo]ut*
+		$(RM) *.dll *.exe [Oo]ut* *.svg *.png *.gpi
 

@@ -1,7 +1,0 @@
-set term svg
-set output 'radDecay.png'
-set xlabel 'Time[days]'
-set ylabel 'Activity of ThX[Relative units]'
-set xtics
-set ytics
-plot 'radData.txt'
