@@ -1,19 +1,24 @@
 using System;
 
-public static class leastsquare{
+public static class leastsquares{
     static vector lsfit (Func<double, double>[] fs, vector x, vector y, vector dy){
         int n = x.size, m = fs.Length;
-        var A = new matrix(n,m);
-        var b = new vector(n);
-        for(int i=0;i<m;i++){
+        matrix A = new matrix(n,m);
+        vector b = new vector(n);
+
+        for(int i=0;i<n;i++)
+        {
             b[i] = y[i]/dy[i];
-            for(int k=0;k<m;k++)A[i,k]= fs[k] (x[i])/dy[i] ;
+            for(int k=0;k<m;k++)
+                {
+                    A[i,k]= fs[k] (x[i])/dy[i];
+                }
         }
         
-        //QRSG for construced A matrix
-        QRGS QR_A = QRGS.solve(A);
-        vector c = QR_A.solve(b);
+        //QR decomposition
+        (matrix Q, matrix R) = QRGS.decomp(A);
+        vector c = QRGS.solve(Q, R, b);
 
-        return (c);
+        return c;
     }
 }

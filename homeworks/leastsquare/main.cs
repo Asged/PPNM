@@ -16,6 +16,8 @@ public class main{
             y[i] = double.Parse(parts[1]);
             dy[i] = int.Parse(parts[2]);
         }
+
+        
         x.print("Vector x:");
         y.print("Vector y:");
         dy.print("Vector dy:");
@@ -24,8 +26,8 @@ public class main{
             dy[i] /= y[i];
         }
 
-        var fs = new Func<double,double>[] { z => 1.0, z => z, z => z*z };
-        var res = leastsquare.lsfit(fs, x, y, dy);
-        Console.WriteLine(res);
+        var fs = new Func<double,double>[] {z => 1.0, z => -z};
+        vector res = leastsquares.lsfit(fs, x, y, dy);
+        Console.WriteLine(res); 
     }
 }

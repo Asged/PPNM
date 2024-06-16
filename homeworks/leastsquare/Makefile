@@ -11,14 +11,14 @@ CSC=$(DOTNET) $(CSCPATH) -reference:$(NETSTANDARD)
 all: out.txt; cat $<
 
 out.txt: main.exe
-		$(RUN) $< > $@
+	$(RUN) $< > $@
 
-main.exe: main.cs leastsquare.dll
-		$(CSC) -reference:$(word 2,$^) $<
+library.dll: matrix.cs vector.cs QRGS.cs leastsquares.cs
+	mcs -target:library -out:library.dll matrix.cs vector.cs QRGS.cs leastsquares.cs
 
-leastsquare.dll : leastsquare.cs QRGS.cs matrix.cs vector.cs
-		$(CSC) -target:library -out:$@ $^
-
+main.exe: main.cs library.dll
+	mcs -target:exe -out:main.exe -reference:library.dll main.cs
+																																			
 rad.gnuplot.svg : radData.txt Makefile
 	echo '\
 		set terminal svg background "white" ;\
