@@ -29,10 +29,6 @@ public class main{
             dy[i] = int.Parse(parts[2]);
         }
 
-        
-        x.print("Vector x:");
-        y.print("Vector y:");
-        dy.print("Vector dy:");
         for(int i=0; i<noOfDataPoints;i++){
             y[i] = Math.Log(y[i]);
             dy[i] /= y[i];
@@ -40,7 +36,17 @@ public class main{
 
         var fs = new Func<double,double>[] {z => 1.0, z => -z};
         leastsquares ls = new leastsquares();
-        vector res = ls.lsfit(fs, x, y, dy);
-        System.Console.WriteLine(res);
+        (vector res, matrix cov) = ls.lsfit(fs, x, y, dy);
+        double halflife = Math.Log(2) / res[1];
+        System.Console.WriteLine($"Half life is: {halflife}, Wikipedia table tells us it is 3.63 days");
+        cov.print("Covariance matrix");
+
+        double uncer1 = Math.Sqrt(cov[0,0]);
+        double uncer2 = Math.Sqrt(cov[1,1]);
+        System.Console.WriteLine($"Fitting parameters uncertainties: {uncer1}, {uncer2}");
+        double halflifeuncer = System.Math.Log(2)*uncer2 / res[1];
+        System.Console.WriteLine($"Uncertainty in halflife is: {halflifeuncer}, this means that it does not agree with modern results");
+
+    
     }
 }

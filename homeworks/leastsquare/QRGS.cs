@@ -14,7 +14,6 @@ public static class QRGS{
 	}//decomp
 	
 	public static vector solve(matrix Q, matrix R, vector b){ //Solve for vector x using Rx = Q_transposed*b
-		int m = Q.size1;
         int n = Q.size2;
         vector QTb = Q.transpose() * b; // Q_transposed * b
         vector x = new vector(n); // solution vector
@@ -29,19 +28,7 @@ public static class QRGS{
         }
 
         return x;
-		
-//		int n = Q.size1;
-//		vector QTb = Q.transpose() * b;  // Q_transposed * b
-//		for(int i = n-1; i>=0;i--){
-//			double sum = 0;
-//			for(int j = i+1; j<n; j++){
-//				sum += R[i,j] * QTb[j];
-//			}
-//			QTb[i] = (QTb[i] - sum)/R[i,i];
-//		}
 
-		
-//		return QTb;
 	}//solve
 
 	public static double det(matrix R){ //Solves determinant for R matrix
