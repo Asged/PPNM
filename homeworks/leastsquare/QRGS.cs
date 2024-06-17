@@ -1,4 +1,4 @@
-public class QRGS{
+public static class QRGS{
 	public static (matrix,matrix) decomp (matrix A){
 		matrix Q = A.copy(); //creates a copy of A and saves in Q, useful since the colums of q_i = a_i / norm of a_i
 		matrix R = new matrix(A.size2,A.size2); //create a new square matrix
@@ -14,18 +14,34 @@ public class QRGS{
 	}//decomp
 	
 	public static vector solve(matrix Q, matrix R, vector b){ //Solve for vector x using Rx = Q_transposed*b
-		int n = Q.size1;
-		vector QTb = Q.transpose() * b;  // Q_transposed * b
-		for(int i = n-1; i>=0;i--){
-			double sum = 0;
-			for(int j = i+1; j<n; j++){
-				sum += R[i,j] * QTb[j];
-			}
-			QTb[i] = (QTb[i] - sum)/R[i,i];
-		}
+		int m = Q.size1;
+        int n = Q.size2;
+        vector QTb = Q.transpose() * b; // Q_transposed * b
+        vector x = new vector(n); // solution vector
+
+        // Backward substitution to solve R * x = Q^T * b
+        for (int i = n - 1; i >= 0; i--) {
+            double sum = 0;
+            for (int j = i + 1; j < n; j++) {
+                sum += R[i, j] * x[j];
+            }
+            x[i] = (QTb[i] - sum) / R[i, i];
+        }
+
+        return x;
+		
+//		int n = Q.size1;
+//		vector QTb = Q.transpose() * b;  // Q_transposed * b
+//		for(int i = n-1; i>=0;i--){
+//			double sum = 0;
+//			for(int j = i+1; j<n; j++){
+//				sum += R[i,j] * QTb[j];
+//			}
+//			QTb[i] = (QTb[i] - sum)/R[i,i];
+//		}
 
 		
-		return QTb;
+//		return QTb;
 	}//solve
 
 	public static double det(matrix R){ //Solves determinant for R matrix
