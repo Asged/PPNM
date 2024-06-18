@@ -13,5 +13,5 @@ Exercies vec, plots and testing are still unfinished
 ---------------------------------------
 | 5  | LeastSquares  | 6 | - | - |  6  |
  ======================================
-|                    total points: 30  |
+|                    total points: 33  |
  ======================================
