@@ -28,10 +28,10 @@ LinearSpline.svg : interpolated.txt dataPoints.txt Makefile
 		set ylabel 'rel' ;\
 		set grid ;\
 		set title 'Errorfunction' ;\
-		plot 'interpolated.txt' using 1:2 with lines lt 7 lc rgb 'purple' notitle, 'interpolated.txt' every ::1 using 1:3 with lines lt 7 lc rgb 'green' notitle, 'dataPoints.txt' lt 7 lc rgb 'red';\
+		plot 'interpolated.txt' using 1:2 with lines lt 7 lc rgb 'purple' notitle, 'interpolated.txt' using 1:3 with lines lt 7 lc rgb 'green' notitle, 'dataPoints.txt' lt 7 lc rgb 'red';\
 	" | tee log.gpi | gnuplot
 
-data.svg : interpolated.txt dataPoints.txt Makefile
+QSpline.svg : qinterpolated.txt QdataPoints.txt Makefile
 	echo "\
 		set terminal svg background 'white' ;\
 		set out '$@' ;\
@@ -39,7 +39,7 @@ data.svg : interpolated.txt dataPoints.txt Makefile
 		set ylabel 'rel' ;\
 		set grid ;\
 		set title 'Errorfunction' ;\
-		plot 'interpolated.txt' using 1:2 with lines lt 7 lc rgb 'purple' notitle, 'interpolated.txt' every ::1 using 1:3 with lines lt 7 lc rgb 'green' notitle, 'dataPoints.txt' lt 7 lc rgb 'red';\
+		plot 'qinterpolated.txt' using 1:2 with lines lt 7 lc rgb 'purple' notitle, 'qinterpolated.txt' using 1:3 with lines lt 7 lc rgb 'green' notitle, 'QdataPoints.txt' lt 7 lc rgb 'red';\
 	" | tee log.gpi | gnuplot
 
 clean:

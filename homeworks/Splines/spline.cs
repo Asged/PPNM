@@ -1,4 +1,5 @@
 using static System.Math;
+using System.Collections.Generic;
 public class splines{
     public static double linterp(double[] x, double[] y, double z){
         int i=binsearch(x,z);
@@ -34,3 +35,67 @@ public class splines{
 
     }
 }//splines
+
+public class qspline {
+	vector x,y,b,c;
+	public qspline(vector xs,vector ys){
+
+            int n = xs.size;
+        x = xs.copy();
+        y = ys.copy();
+        b = new vector(n - 1);
+        c = new vector(n - 1);
+
+        vector h = new vector(n - 1);
+        for (int i = 0; i < n - 1; i++)
+        {
+            h[i] = x[i + 1] - x[i];
+        }
+
+        vector p = new vector(n - 1);
+        for (int i = 0; i < n - 1; i++)
+        {
+            p[i] = (y[i + 1] - y[i]) / h[i];
+        }
+
+        c[0] = 0;
+        for (int i = 0; i < n - 2; i++)
+        {
+            c[i + 1] = (p[i + 1] - p[i] - c[i] * h[i]) / h[i + 1];
+        }
+
+        c[n - 2] /= 2;
+        for (int i = n - 3; i >= 0; i--)
+        {
+            c[i] = (p[i + 1] - p[i] - c[i + 1] * h[i + 1]) / h[i];
+        }
+
+        for (int i = 0; i < n - 1; i++)
+        {
+            b[i] = p[i] - c[i] * h[i];
+        }
+		}
+
+	public double evaluate(double z){
+        int i = splines.binsearch(x,z);
+        double h = z - x[i];
+        return y[i] + h * (b[i] + h * c[i]);
+    }
+	public double derivative(double z){
+        int i = splines.binsearch(x,z);
+        double h = z - x[i];
+        return b[i] + 2 * c[i] * h;
+    }
+	public double integral(double z){
+        int i = splines.binsearch(x,z);
+        double integral = 0;
+        for (int j = 0; j < i; j++)
+        {
+            double h = x[j + 1] - x[j];
+            integral += y[j] * h + b[j] * h * h / 2 + c[j] * h * h * h / 3;
+        }
+        double h_last = z - x[i];
+        integral += y[i] * h_last + b[i] * h_last * h_last / 2 + c[i] * h_last * h_last * h_last / 3;
+        return integral;
+    }
+	}
