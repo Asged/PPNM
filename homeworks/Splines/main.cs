@@ -15,24 +15,10 @@ class main {
                 writer.WriteLine($"{x[i]}\t{y[i]}");
             }
         }
-        double step = 0.0001;
-        int nPoints = (int)((x[x.Length - 1] - x[0]) / step) + 1;
-        double[] z = new double[nPoints];
-        double[] interpolatedValues = new double[nPoints];
-        double[] integralValues = new double[nPoints];
-        for (int i = 0; i < nPoints; i++) {
-            z[i] = x[0] + i * step;
-            interpolatedValues[i] = splines.linterp(x, y, z[i]);
-            integralValues[i] = splines.linterpInteg(x, y, z[i]);
-        }
-        
-        using (StreamWriter writer = new StreamWriter("linData.txt"))
-        {
-            writer.WriteLine("z\tInterpolated\tIntegral");
-            for (int i = 0; i < nPoints; i++)
-            {
-                writer.WriteLine($"{z[i]}\t{interpolatedValues[i]}\t{integralValues[i]}");
-            }
+
+        var interpolated_data = new StreamWriter("interpolated.txt");
+        for (double z = x[0]; z < x[x.Length-1]; z+=0.01) {    
+            interpolated_data.WriteLine($"{z}\t{splines.linterp(x,y,z)}\t{splines.linterpInteg(x,y,z)}");
         }
     }
     

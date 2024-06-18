@@ -17,10 +17,10 @@ out.txt: main.exe
 main.exe: main.cs library.dll
 	$(CSC) -reference:library.dll $<
 
-library.dll: spline.cs
-	mcs -target:library -out:library.dll spline.cs
+library.dll: spline.cs vector.cs
+	mcs -target:library -out:library.dll spline.cs vector.cs
 
-LinearSpline.svg : linData.txt Makefile
+LinearSpline.svg : interpolated.txt dataPoints.txt Makefile
 	echo "\
 		set terminal svg background 'white' ;\
 		set out '$@' ;\
@@ -28,7 +28,18 @@ LinearSpline.svg : linData.txt Makefile
 		set ylabel 'rel' ;\
 		set grid ;\
 		set title 'Errorfunction' ;\
-		plot 'linData.txt' every ::1 using 1:2 with lines lt 7 lc rgb 'purple' notitle, 'linData.txt' every ::1 using 1:3 with lines lt 7 lc rgb 'green' notitle, 'dataPoints.txt' lt 7 lc rgb 'red';\
+		plot 'interpolated.txt' using 1:2 with lines lt 7 lc rgb 'purple' notitle, 'interpolated.txt' every ::1 using 1:3 with lines lt 7 lc rgb 'green' notitle, 'dataPoints.txt' lt 7 lc rgb 'red';\
+	" | tee log.gpi | gnuplot
+
+data.svg : interpolated.txt dataPoints.txt Makefile
+	echo "\
+		set terminal svg background 'white' ;\
+		set out '$@' ;\
+		set xlabel 'x' ;\
+		set ylabel 'rel' ;\
+		set grid ;\
+		set title 'Errorfunction' ;\
+		plot 'interpolated.txt' using 1:2 with lines lt 7 lc rgb 'purple' notitle, 'interpolated.txt' every ::1 using 1:3 with lines lt 7 lc rgb 'green' notitle, 'dataPoints.txt' lt 7 lc rgb 'red';\
 	" | tee log.gpi | gnuplot
 
 clean:

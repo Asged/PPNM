@@ -1,3 +1,4 @@
+using static System.Math;
 public class splines{
     public static double linterp(double[] x, double[] y, double z){
         int i=binsearch(x,z);
@@ -18,17 +19,18 @@ public class splines{
 	}
 
     public double linterpInteg(double[] x, double[] y, double z){
-        int k = binsearch(x,z);
-        double integral = 0;
-        int i = 0;
-        while(i < k
-        ){
-            double cont = y[i] * (x[i+1] - x[i]) + (y[i+1] - y[i])/(x[i+1] - x[i]) * System.Math.Pow(x[i+1] - x[i], 2)/2;
-            integral += cont;
-            i++;
-        }
-        double restIntegral = y[i]*(z-x[i])+(y[i+1]-y[i])/(z-x[i])*System.Math.Pow((z-x[i]),2)/2;
-        integral += restIntegral;
-        return integral;
+
+    int k = binsearch(x, z); // Find the interval index
+    double integral = 0;
+    for (int i = 0; i < k; i++)
+    {
+        double cont = y[i] * (x[i + 1] - x[i]) + (y[i + 1] - y[i]) / (x[i + 1] - x[i]) * Pow(x[i + 1] - x[i], 2) / 2;
+        integral += cont;
+    }
+    double restIntegral = y[k] * (z - x[k]) + (y[k + 1] - y[k]) / (x[k + 1] - x[k]) * Pow((z - x[k]), 2) / 2;
+    integral += restIntegral;
+    return integral;
+
+
     }
 }//splines
