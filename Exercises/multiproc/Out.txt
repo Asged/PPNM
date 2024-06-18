@@ -1,0 +1,28 @@
+Main: nterms=10000000 nthreads=1
+Main: starting threads...
+Main: waiting for threads...
+harm: a=1 b=10000000
+harm: sum)16.6953113658573
+Main: total sum = 16.6953113658573
+ 0.08 0.03
+Main: nterms=10000000 nthreads=1
+Main: starting threads...
+Main: waiting for threads...
+harm: a=1 b=10000000
+harm: sum)16.6953113658573
+Main: total sum = 16.6953113658573
+ 0.08 0.04
+Main: nterms=10000000 nthreads=1
+Main: starting threads...
+Main: waiting for threads...
+harm: a=1 b=10000000
+harm: sum)16.6953113658573
+Main: total sum = 16.6953113658573
+ 0.08 0.04
+Main: nterms=10000000 nthreads=1
+Main: starting threads...
+Main: waiting for threads...
+harm: a=1 b=10000000
+harm: sum)16.6953113658573
+Main: total sum = 16.6953113658573
+ 0.08 0.03

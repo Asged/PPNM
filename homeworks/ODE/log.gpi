@@ -1,0 +1,1 @@
+	set terminal svg background 'white' ;	set out 'oscillator.svg' ;	set xlabel 'x' ;	set ylabel 'rel' ;	set grid ;	set title 'Pendulum with friction' ;	plot 'osc.txt' lt 7 lc rgb 'purple' pointsize 1 notitle, 'osc2.txt' with lines lc 'blue' ;
