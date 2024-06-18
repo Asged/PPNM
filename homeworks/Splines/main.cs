@@ -1,35 +1,39 @@
-class main{
-    static void Main(){
-
-    }//Main
-}//main
-
-public class splines{
-    public static double linterp(double[] x, double[] y, double z){
-        int i=binsearch(x,z);
-        double dx=x[i+1]-x[i]; if(!(dx>0)) throw new System.Exception("uups...");
-        double dy=y[i+1]-y[i];
-        return y[i]+dy/dx*(z-x[i]);
+using System.IO;
+class main {
+    static void Main() {
+        double[] x = new double[10];
+        double[] y = new double[10];
+        splines splines = new splines();
+        for (int i = 0; i < 10; i++) {
+            x[i] = i;
+            y[i] = System.Math.Cos(i);
+        }
+        using (StreamWriter writer = new StreamWriter("dataPoints.txt"))
+        {
+            for (int i = 0; i < x.Length; i++)
+            {
+                writer.WriteLine($"{x[i]}\t{y[i]}");
+            }
+        }
+        double step = 0.0001;
+        int nPoints = (int)((x[x.Length - 1] - x[0]) / step) + 1;
+        double[] z = new double[nPoints];
+        double[] interpolatedValues = new double[nPoints];
+        double[] integralValues = new double[nPoints];
+        for (int i = 0; i < nPoints; i++) {
+            z[i] = x[0] + i * step;
+            interpolatedValues[i] = splines.linterp(x, y, z[i]);
+            integralValues[i] = splines.linterpInteg(x, y, z[i]);
+        }
+        
+        using (StreamWriter writer = new StreamWriter("linData.txt"))
+        {
+            writer.WriteLine("z\tInterpolated\tIntegral");
+            for (int i = 0; i < nPoints; i++)
+            {
+                writer.WriteLine($"{z[i]}\t{interpolatedValues[i]}\t{integralValues[i]}");
+            }
+        }
     }
-
-    public static int binsearch(double[] x, double z)
-	{/* locates the interval for z by bisection */ 
-	    if( z<x[0] || z>x[x.Length-1] ) throw new System.Exception("binsearch: bad z");
-	    int i=0, j=x.Length-1;
-	    while(j-i>1){
-		    int mid=(i+j)/2;
-		    if(z>x[mid]) i=mid; else j=mid;
-		}
-	    return i;
-	}
-
-    double linterpInteg(double[] x, double[] y, double z){
-        int i=binsearch(x,z);
-        double dx=x[i+1]-x[i]; 
-        if(!(dx>0)) throw new System.Exception("uups..."); //x is only increasing
-        double dy=y[i+1]-y[i];
-        return y[i]*(z-x[i])+dy/dx*System.Math.Pow(z-x[i], 2)/2;
-    }
-
     
-}//splines
+}
