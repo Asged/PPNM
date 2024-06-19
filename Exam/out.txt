@@ -1,0 +1,23 @@
+Matrix A
+         1          2          3 
+         1          2          1 
+         3          2          1 
+x0         1          1          1 
+3
+-1.73197279604727
+Current eigenvalue: 5.33738683961627
+Current eigenvector:     -0.581      -0.57     -0.581 
+-0.982026598332001
+Current eigenvalue: 5.24179504649865
+Current eigenvector:      0.647      0.404      0.647 
+-0.99999160448762
+Current eigenvalue: 5.23607538895426
+Current eigenvector:     -0.648       -0.4     -0.648 
+-0.999999999986267
+Current eigenvalue: 5.23606797751207
+Current eigenvector:      0.648        0.4      0.648 
+-1
+Current eigenvalue: 5.23606797749979
+Current eigenvector:     -0.648       -0.4     -0.648 
+Eigenvalue from inverse iteration: 5.23606797749979
+Eigenvector from inverse iteration:     -0.648       -0.4     -0.648 
