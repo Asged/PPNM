@@ -4,7 +4,6 @@ public class IIAE{
 {
     int n = A.size1;
     var rnd = new System.Random();
-
     if (x0 == null)
     {
         x0 = new vector(n);
@@ -14,11 +13,14 @@ public class IIAE{
         }
     }
 
+    System.Console.WriteLine($"Guess for eigenvalue: {s}");
+    x0.print("Guess for eigen vector:");
+
     vector x1 = x0;
     double lambda0 = s;
     double lambda1 = s;
     int it = 0;
-    System.Console.WriteLine(x0.dot(x0));
+
     do
     {
         x0 = x1;
@@ -33,12 +35,11 @@ public class IIAE{
         
         lambda0 = lambda1;
         lambda1 = x1.dot(A * x1) / x1.dot(x1);
-        System.Console.WriteLine(x1.dot(x0));
-        System.Console.WriteLine($"Current eigenvalue: {lambda1}");
-        x1.print("Current eigenvector: ");
         it++; 
-    } while (System.Math.Abs((lambda1 - lambda0) / lambda1) > acc && it < 1000);
-
+    } while (System.Math.Abs((lambda1 - lambda0) / lambda1) > acc );//&& it < 10000);
+    System.Console.WriteLine($"Eigenvalue from inverse iteration: {lambda1}");
+    x1.print("Eigenvector from inverse iteration: ");
+    System.Console.WriteLine($"Number of iterations to find solution: {it}");
     return (lambda1, x1); // Eigenvalue and associated eigenvector
 }
 
