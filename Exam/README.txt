@@ -1,0 +1,4 @@
+Evaluation for project is 10 points
+The algorithm was implemented as suggested in the book using a rayleigh quotient to find the eigenvalues and eigenvectors. It does so comparing eigenvalue with one from a previous iteration until it reaches a threshold where the value doesnt change much anymore.
+Afterwards the implementation was tested to see how it would handle large value("wrong") guesses, it handled large values fine still finding correct value, it just breaks down when the number is large enough. Thereafter it was tested to find the real part of complex solution, finding that it can do that too it just takes many more iterations to do so
+Lastly it was checked how it handled large matrices a 10x10 and a 15x15, finding that the algorithm seems to be just as effecient as when using smaller matrices.
