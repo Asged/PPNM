@@ -1,0 +1,1 @@
+	set terminal svg background 'white' ;	set out 'errorfunc.svg' ;	set xlabel 'x' ;	set ylabel 'rel' ;	set yrange [-2:2] ;	set grid ;	set title 'Errorfunction' ;	plot 'Errorfunc.txt' with lines lt 14 lc rgb 'purple' lw 5 title 'Errorfunction', 'plots.txt' with lines lt 7 lc rgb 'green' title 'Errorfunction from plots' ;
