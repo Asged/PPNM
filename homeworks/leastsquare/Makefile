@@ -14,15 +14,10 @@ rad.gnuplot.svg : radData.txt Makefile
 		set xlabel 'x' ;\
 		set ylabel 'rel' ;\
 		set grid ;\
-		set title 'Errorfunction' ;\
+		set title 'Rad decay' ;\
 		plot 'radData.txt' with yerrorbars lt 7 lc rgb 'purple' pointsize 1 notitle, exp(4.96 - 0.171*x) with lines lc 'blue' dashtype '--' ;\
 	" | tee log.gpi | gnuplot
-
-
-
-
-
-																																			
+																															
 clean:
 		rm -f *.dll *.exe [Oo]ut* *.svg *.png *.gpi
 

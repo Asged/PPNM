@@ -1,1 +1,1 @@
-	set terminal svg background 'white' ;	set out 'rad.gnuplot.svg' ;	set xlabel 'x' ;	set ylabel 'rel' ;	set grid ;	set title 'Errorfunction' ;	plot 'radData.txt' with yerrorbars lt 7 lc rgb 'purple' pointsize 1 notitle, exp(4.96 - 0.171*x) with lines lc 'blue' dashtype '--' ;
+	set terminal svg background 'white' ;	set out 'rad.gnuplot.svg' ;	set xlabel 'x' ;	set ylabel 'rel' ;	set grid ;	set title 'Rad decay' ;	plot 'radData.txt' with yerrorbars lt 7 lc rgb 'purple' pointsize 1 notitle, exp(4.96 - 0.171*x) with lines lc 'blue' dashtype '--' ;
