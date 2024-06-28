@@ -1,0 +1,4 @@
+Calculacting area of unit circle. Result from integration: 3.13099082591959 	 Uncertainty in calculation: 0.0181154902082397
+Plot data.svg seems to follow 1/sqrt(N), estimated error seems to follow it very nicely, whereas actual error has a lot of points around the 1/sqrt(N)
+Calculacting area of unit circle. Result from integration: 1.35834566182039 	 Uncertainty in calculation: 0.0293739813426824
+Calculacting area of unit circle. Result from integration: Infinity 	 Uncertainty in calculation: NaN

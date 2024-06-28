@@ -1,0 +1,2 @@
+Rosenbrock's valley minimum: (1.00001831756052, 1.00003643779078) in 8 steps
+Himmelblau's function minimum: (2.99999997355546, 2.00000000993329) in 9 steps
