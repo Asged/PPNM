@@ -52,6 +52,15 @@ public class main{
         s = 1e162;
         IIAE.inverse_iteration(A, s, x0);
         System.Console.WriteLine("When very large numbers are used, however if both the guess for eigenvector and eigenvalue or large then there it still works suggesting a proportionality");
+
+        System.Console.WriteLine("#####################################");
+        System.Console.WriteLine("Test for same matrix this time making an eigenvector and eigenvalue guess that is 0");
+        s = 0;
+        x0[0] = 0;
+        x0[1] = 0;
+        x0[2] = 0;
+        IIAE.inverse_iteration(A, s, x0);
+        System.Console.WriteLine("Does not work");        
         
         System.Console.WriteLine("#####################################");
         System.Console.WriteLine("New matrix, with real and complex solutions");
