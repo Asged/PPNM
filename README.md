@@ -16,6 +16,8 @@ Exercies vec, plots and testing are still unfinished
 | 6  | Integration   | 6 | 3 | - |  9  |
 ---------------------------------------
 | 7  | MonteCarlo   | 6 | - | - |  6  |
+---------------------------------------
+| 8  | Minimization | 6 | - | - |  6  |
  ======================================
-|                    total points: 54  |
+|                    total points: 60  |
  ======================================
