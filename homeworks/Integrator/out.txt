@@ -6,3 +6,4 @@ Evaluations from scpiy.integrate.quad: 231
 The integral of ln(x)/sqrt(x) from 0 to 1 is: -3.99991705899915, within accuracy: True, number of evaluations: 4301
 The integral of ln(x)/sqrt(x) using clenshaw from 0 to 1 is: -3.99987385646141, within accuracy: True, number of integrand evaluations: 47
 Evaluations from scpiy.integrate.quad: 315
+Normal integration routine is slower than python but the clenshaw implementation is faster than python

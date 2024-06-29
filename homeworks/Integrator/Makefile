@@ -20,4 +20,4 @@ errorfunc.svg : out.txt plots.txt Makefile
 	" | tee log.gpi | gnuplot
 
 clean:
-	rm -f *.dll *.exe Errorfunc.txt *.svg out.txt
+	rm -f *.dll *.exe *.svg *.txt
