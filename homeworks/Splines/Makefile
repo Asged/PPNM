@@ -43,4 +43,4 @@ QSpline.svg : qinterpolated.txt QdataPoints.txt Makefile
 	" | tee log.gpi | gnuplot
 
 clean:
-	$(RM) *.dll *.exe [Oo]ut* *.txt
+	$(RM) *.dll *.exe [Oo]ut* *.txt *.svg
